@@ -55,7 +55,7 @@ def neural_style_transfer(config):
     os.makedirs(dump_path, exist_ok=True)
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
+    print(device)
     content_img = utils.prepare_img(content_img_path, config['height'], device)
     style_img = utils.prepare_img(style_img_path, config['height'], device)
 
@@ -149,9 +149,9 @@ if __name__ == "__main__":
     parser.add_argument("--tv_weight", type=float, help="weight factor for total variation loss", default=1e0)
 
     parser.add_argument("--optimizer", type=str, choices=['lbfgs', 'adam'], default='lbfgs')
-    parser.add_argument("--model", type=str, choices=['vgg16', 'vgg19'], default='vgg19')
+    parser.add_argument("--model", type=str, choices=['vgg16', 'vgg19'], default='vgg16')
     parser.add_argument("--init_method", type=str, choices=['random', 'content', 'style'], default='content')
-    parser.add_argument("--saving_freq", type=int, help="saving frequency for intermediate images (-1 means only final)", default=-1)
+    parser.add_argument("--saving_freq", type=int, help="saving frequency for intermediate images (-1 means only final)", default=100)
     args = parser.parse_args()
 
     # some values of weights that worked for figures.jpg, vg_starry_night.jpg (starting point for finding good images)
